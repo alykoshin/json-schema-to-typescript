@@ -322,6 +322,11 @@ function generateInterface(ast: TInterface, options: Options): string {
 }
 
 function generateComment(comment: string): string {
+  if (Array.isArray(comment)) comment=comment.join('\r');
+  if (typeof comment !== 'string') {
+    console.error('invalid commment:' + comment);
+  }
+
   return ['/**', ...comment.split('\n').map(_ => ' * ' + _), ' */'].join('\n')
 }
 
